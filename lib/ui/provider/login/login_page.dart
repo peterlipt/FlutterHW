@@ -100,7 +100,7 @@ class _LoginPageProviderState extends State<LoginPageProvider> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextField(
+                TextFormField(
                   controller: _emailController,
                   enabled: !model.isLoading,
                   decoration: InputDecoration(
@@ -110,7 +110,7 @@ class _LoginPageProviderState extends State<LoginPageProvider> {
                   onChanged: _onEmailChanged,
                 ),
                 const SizedBox(height: 16),
-                TextField(
+                TextFormField(
                   controller: _passwordController,
                   enabled: !model.isLoading,
                   obscureText: true,
@@ -137,14 +137,22 @@ class _LoginPageProviderState extends State<LoginPageProvider> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                model.isLoading
-                    ? const CircularProgressIndicator()
-                    : ElevatedButton(
-                        onPressed: model.isLoading
-                            ? null
-                            : () => _onLoginPressed(model),
-                        child: const Text('Bejelentkezés'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: model.isLoading ? null : () => _onLoginPressed(model),
+                      child: const Text('Bejelentkezés'),
+                    ),
+                    if (model.isLoading)
+                      Container(
+                        width: 0,
+                        height: 0,
+                        margin: EdgeInsets.zero,
+                        child: const SizedBox.shrink(),
                       ),
+                  ],
+                ),
               ],
             ),
           ),
