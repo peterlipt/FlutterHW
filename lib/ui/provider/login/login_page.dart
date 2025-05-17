@@ -20,7 +20,6 @@ class _LoginPageProviderState extends State<LoginPageProvider> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Only do auto login once, and synchronously to avoid test issues
     if (!_autoLoginFinished) {
       _autoLoginFinished = true;
       _handleAutoLogin();
@@ -31,14 +30,13 @@ class _LoginPageProviderState extends State<LoginPageProvider> {
     try {
       // Get the model synchronously
       final model = Provider.of<LoginModel>(context, listen: false);
-      // Call tryAutoLogin but don't await it
       model.tryAutoLogin().then((success) {
         if (success && mounted) {
           Navigator.of(context).pushReplacementNamed('/list');
         }
       });
     } catch (e) {
-      // Silently handle errors
+      // handle errors
     }
   }
 

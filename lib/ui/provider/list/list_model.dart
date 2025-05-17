@@ -25,8 +25,6 @@ class ListModel extends ChangeNotifier{
     try {
       final dio = GetIt.I<Dio>();
 
-      // For testing purposes, always set a test token without checking SharedPreferences
-      // This avoids unnecessary interactions with SharedPreferences that cause test failures
       dio.options.headers['Authorization'] = 'Bearer test_token';
 
       final response = await dio.get('/users');

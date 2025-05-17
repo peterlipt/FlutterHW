@@ -38,14 +38,12 @@ class _ListPageProviderState extends State<ListPageProvider> {
                     final user = model.users[index];
                     return ListTile(
                       key: Key('userTile_$index'),
-                      // Use plain Image.network instead of CircleAvatar for test compatibility
                       leading: ClipOval(
                         child: Image.network(
                           user.avatarUrl,
                           width: 40,
                           height: 40,
                           fit: BoxFit.cover,
-                          // Add a key for easier finding in tests
                           key: Key('userImage_${user.avatarUrl}'),
                         ),
                       ),
