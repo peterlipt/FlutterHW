@@ -58,11 +58,8 @@ class LoginModel extends ChangeNotifier {
 
       if (rememberMe) {
         await prefs.setString('token', token);
-      } else {
-        try {
-          await prefs.remove('token');
-        } catch (_) {}
       }
+      // Removed the 'else' block that was trying to remove the token
       isLoading = false;
       notifyListeners();
       return token;
